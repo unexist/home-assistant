@@ -1,0 +1,28 @@
+blinds_status:
+    url: "https://api.switch-bot.com/v1.1/devices/{{ device_id }}/status"
+    headers:
+        accept: application/json
+        Authorization: !secret switchbot_authorization
+        sign: !secret switchbot_sign
+    content_type: "application/json"
+    method: "GET"
+
+blinds_set_position:
+    url: "https://api.switch-bot.com/v1.1/devices/{{ device_id }}/commands"
+    headers:
+        accept: application/json
+        Authorization: !secret switchbot_authorization
+        sign: !secret switchbot_sign
+    content_type: "application/json"
+    method: "POST"
+    payload: '{"command": "setPosition", "parameter": {{ position }} }'
+
+blinds_turn_off:
+    url: "https://api.switch-bot.com/v1.1/devices/{{ device_id }}/commands"
+    headers:
+        accept: application/json
+        Authorization: !secret switchbot_authorization
+        sign: !secret switchbot_sign
+    content_type: "application/json"
+    method: "POST"
+    payload: '{"command": "turnOff", "parameter": {{ channel }} }'

@@ -1,0 +1,16 @@
+= home-assistant
+
+This repository contains my custom home-assistant recipes
+
+== Packages
+
+|===
+| Name | Description
+
+| Switchbot
+| Helper to integrate Switchbot Relay 2pm as a cover handler in HASS
+|===
+
+= Links
+
+- https://github.com/OpenWonderLabs/SwitchBotAPI
