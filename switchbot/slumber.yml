@@ -1,0 +1,65 @@
+profiles:
+  development:
+    name: null
+    default: true
+    data:
+      host: https://api.switch-bot.com/v1.1
+
+.base_request:
+  headers:
+    accept: application/json
+    Authorization: file("authkey.txt")
+    sign: file("signkey.txt")
+
+requests:
+  devices:
+    $ref: "#/.base_request"
+    method: GET
+    url: '{{ host }}/devices'
+
+  motion_sensor:
+    $ref: "#/.base_request"
+    method: GET
+    url: '{{ host }}/devices/B0E9FEE65F3F/status'
+
+  device_types:
+    name: Devices Types
+    requests:
+      contact_sensor:
+        $ref: "#/.base_request"
+        method: GET
+        url: '{{ host }}/devices/B0E9FE932B5B/status'
+
+      relay_draussen:
+        $ref: "#/.base_request"
+        method: GET
+        url: '{{ host }}/devices/DC1ED510B5E2/status'
+
+      relay_blinds:
+        $ref: "#/.base_request"
+        method: GET
+        url: '{{ host }}/devices/DC1ED5126DC2/status'
+
+      relay_blinds_open:
+        $ref: "#/.base_request"
+        method: POST
+        url: '{{ host }}/devices/DC1ED5126DC2/commands'
+        body:
+          type: json
+          data: { "command": "setPosition", "parameter": 0 }
+
+      relay_blinds_close:
+        $ref: "#/.base_request"
+        method: POST
+        url: '{{ host }}/devices/DC1ED5126DC2/commands'
+        body:
+          type: json
+          data: { "command": "setPosition", "parameter": 100 }
+
+  webhook:
+    $ref: "#/.base_request"
+    method: POST
+    url: '{{ host }}/webhook/queryWebhook'
+    body:
+      type: json
+      data: { "action": "queryUrl" }
