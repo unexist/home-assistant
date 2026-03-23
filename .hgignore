@@ -1,0 +1,9 @@
+syntax: glob
+
+# IntelliJ
+**/*.iml
+*.iml
+*.bin
+
+# Secrets
+**/*key.txt
